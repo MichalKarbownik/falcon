@@ -6,7 +6,7 @@ import { BlogPostExcerptType } from './BlogPostsQuery';
 import { DateFormat } from '../Locale';
 import { toGridTemplate } from '../helpers';
 
-const BlogPostEcerptArea = {
+const BlogPostExcerptArea = {
   image: 'image',
   title: 'title',
   date: 'date',
@@ -24,11 +24,11 @@ const blogPostExcerptLayout: DefaultThemeProps = {
     gridTemplate: {
       xs: toGridTemplate([
         [ '1fr',                      ],
-        [ BlogPostEcerptArea.image    ],
-        [ BlogPostEcerptArea.date     ],
-        [ BlogPostEcerptArea.title    ],
-        [ BlogPostEcerptArea.excerpt  ],
-        [ BlogPostEcerptArea.readMore ]
+        [ BlogPostExcerptArea.image    ],
+        [ BlogPostExcerptArea.date     ],
+        [ BlogPostExcerptArea.title    ],
+        [ BlogPostExcerptArea.excerpt  ],
+        [ BlogPostExcerptArea.readMore ]
       ])
     },
     css: {
@@ -43,15 +43,15 @@ export const BlogPostExcerpt: React.SFC<{ excerpt: BlogPostExcerptType }> = ({ e
       {excerpt.image && (
         <Image
           css={{ height: 300 }}
-          gridArea={BlogPostEcerptArea.image}
+          gridArea={BlogPostExcerptArea.image}
           src={excerpt.image.url}
           alt={excerpt.image.description}
         />
       )}
-      <H3 gridArea={BlogPostEcerptArea.title}>{excerpt.title}</H3>
-      <DateFormat gridArea={BlogPostEcerptArea.date} value={excerpt.date} />
-      <Text gridArea={BlogPostEcerptArea.excerpt}>{excerpt.excerpt}</Text>
-      <Text gridArea={BlogPostEcerptArea.readMore} css={{ textDecoration: 'underline' }}>
+      <H3 gridArea={BlogPostExcerptArea.title}>{excerpt.title}</H3>
+      <DateFormat gridArea={BlogPostExcerptArea.date} value={excerpt.date} />
+      <Text gridArea={BlogPostExcerptArea.excerpt}>{excerpt.excerpt}</Text>
+      <Text gridArea={BlogPostExcerptArea.readMore} css={{ textDecoration: 'underline' }}>
         <T id="blog.readMore" />
       </Text>
     </Link>
