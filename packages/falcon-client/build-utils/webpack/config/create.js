@@ -53,25 +53,28 @@ function getESLintLoader(paths, isDev) {
     : undefined;
 }
 
-function getBabelLoaderOptions(babelRcPath) {
-  const options = {
-    babelrc: true,
-    presets: []
-  };
-
-  const hasBabelRc = fs.existsSync(babelRcPath);
-  if (!hasBabelRc) {
-    options.babelrc = false;
-    options.presets.push(require.resolve('@deity/babel-preset-falcon-client'));
+/**
+ *
+ * @param {string[]} appBabelConfigs
+ */
+function getBabelLoaderOptions(appBabelConfigs) {
+  const babelConfigFile = appBabelConfigs.find(x => fs.existsSync(x));
+  if (babelConfigFile) {
+    return {
+      configFile: babelConfigFile,
+      presets: []
+    };
   }
 
-  return options;
+  return {
+    presets: [require.resolve('@deity/babel-preset-falcon-client')]
+  };
 }
 
 /**
  * @param {'web' | 'node' } target
  * @param {'development' | 'production'} env
- * @param {Object} cssLoaderOptions
+ * @param {object} cssLoaderOptions
  */
 function getStyleLoaders(target, env, cssLoaderOptions) {
   const { minimize, ...restOptions } = cssLoaderOptions;
@@ -134,7 +137,7 @@ function getStyleLoaders(target, env, cssLoaderOptions) {
  * Webpack configuration factory. It's the juice!
  * @param {'web' | 'node' } target
  * @param {CreateWebpackOptions} options
- * @returns {Object} webpack configuration
+ * @returns {object} webpack configuration
  */
 module.exports = (target = 'web', options) => {
   options = { ...options, publicPath: options.publicPath || '/' };
@@ -197,7 +200,7 @@ module.exports = (target = 'web', options) => {
           use: [
             {
               loader: require.resolve('babel-loader'),
-              options: getBabelLoaderOptions(paths.appBabelRc)
+              options: getBabelLoaderOptions(paths.appBabelConfigs)
             }
           ]
         },

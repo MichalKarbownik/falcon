@@ -57,7 +57,7 @@ module.exports = {
   appWebpackAssets: resolveApp('build/assets.json'),
 
   testsSetup: resolveApp('src/setupTests.js'),
-  appBabelRc: resolveApp('.babelrc'),
+  appBabelConfigs: [resolveApp('babel.config.json'), resolveApp('babel.config.js')],
   appEslintRc: resolveApp('.eslintrc'),
   appNodeModules: resolveApp('node_modules'),
 

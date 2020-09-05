@@ -16,7 +16,7 @@
     "@deity/falcon-logger": "^1.0.2",
     "@deity/falcon-server-env": "^0.1.9",
     "graphql": "^14.1.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "qs": "6.6.0"
   },
   "devDependencies": {
